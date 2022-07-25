@@ -1,0 +1,195 @@
+{% extends 'base.html' %}
+
+
+{% block title%}
+Tipos de Equipamentos
+{% endblock title %}
+
+{% block breadcrumb %}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html"><i class="bi bi-house-door"></i></a></li>
+    <li class="breadcrumb-item active">Tipo de Equipamentos</li>
+    <li class="breadcrumb-item active">Listar</li>
+</o>
+{% endblock breadcrumb %}
+
+
+
+{% block content %}
+    <div class="card">
+        <div class="card-body">
+            <br>
+              <!-- Default Tabs -->
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="tab-todos" data-bs-toggle="tab" data-bs-target="#todos" type="button" role="tab" aria-controls="todos" aria-selected="true">Todos</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="tab-ativos" data-bs-toggle="tab" data-bs-target="#ativos" type="button" role="tab" aria-controls="ativos" aria-selected="false">Ativos</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="tab-inativos" data-bs-toggle="tab" data-bs-target="#inativos" type="button" role="tab" aria-controls="inativos" aria-selected="false">Inativos</button>
+                </li>
+              </ul>
+              <div class="tab-content pt-2" id="myTabContent">
+                <div class="tab-pane fade active show" id="todos" role="tabpanel" aria-labelledby="tab-todos">
+                    <table class="dataTable table table-striped">
+                        <br>
+                        <thead>
+                            <tr>
+                                <th scope="col" style="width: 50px">TAG</th>
+                                <th scope="col">Tipo </th>
+                                <th scope="col">Situação </th>
+                                <th scope="col">Marca </th>
+                                <th scope="col">Modelo </th>
+                                <th scope="col">Empresa </th>
+                                <th scope="col">Colaborador </th>
+                                <th scope="col" style="width: 70px">Status</th>
+                                <th scope="col" style="width: 50px">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for equipamento in equipamentos %}
+                            <tr>
+                                <th scope="row">{{equipamento.tag_patrimonio}}</th>
+                                <th scope="row">{{equipamento.tipo_equipamento}}</th>
+                                <th scope="row">{{equipamento.get_situacao_display}}</th>
+                                <th scope="row">{{equipamento.marca}}</th>
+                                <th scope="row">{{equipamento.modelo}}</th>
+                                <th scope="row">{{equipamento.empresa}}</th>
+                                <th scope="row">{{equipamento.colaborador}}</th>
+                                <td>
+                                    {% if equipamento.status == True %}
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckCheckedDisabled" checked="" disabled="">
+                                            <label class="form-check-label" for="flexSwitchCheckCheckedDisabled"><b></b></label>
+                                        </div>
+                                    {% elif equipamento.status == False %}
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDisabled" disabled="">
+                                            <label class="form-check-label" for="flexSwitchCheckDisabled"></label>
+                                        </div>
+                                    {% endif %}
+                                </td>
+                                <td style="center">
+                                    <a href="{% url 'editar_equipamento' equipamento.id %}">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="ativos" role="tabpanel" aria-labelledby="tab-ativos">
+                    <table class="dataTable table table-striped">
+                        <br>
+                        <thead>
+                            <tr>
+                                <th scope="col" style="width: 50px">TAG</th>
+                                <th scope="col">Tipo </th>
+                                <th scope="col">Situação </th>
+                                <th scope="col">Marca </th>
+                                <th scope="col">Modelo </th>
+                                <th scope="col">Empresa </th>
+                                <th scope="col">Colaborador </th>
+                                <th scope="col" style="width: 70px">Status</th>
+                                <th scope="col" style="width: 50px">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for equipamentosAtivo in equipamentosAtivos %}
+                                <tr>
+                                    <th scope="row">{{equipamentosAtivo.tag_patrimonio}}</th>
+                                    <th scope="row">{{equipamentosAtivo.tipo_equipamento}}</th>
+                                    <th scope="row">{{equipamentosAtivo.get_situacao_display}}</th>
+                                    <th scope="row">{{equipamentosAtivo.marca}}</th>
+                                    <th scope="row">{{equipamentosAtivo.modelo}}</th>
+                                    <th scope="row">{{equipamentosAtivo.empresa}}</th>
+                                    <th scope="row">{{equipamentosAtivo.colaborador}}</th>
+                                    <td>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckCheckedDisabled" checked="" disabled="">
+                                            <label class="form-check-label" for="flexSwitchCheckCheckedDisabled"><b></b></label>
+                                        </div>
+                                    </td>
+                                    <td style="center">
+                                        <a href="#">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="inativos" role="tabpanel" aria-labelledby="tab-inativos">
+                  <table class="dataTable table table-striped">
+                        <br>
+                        <thead>
+                            <tr>
+                                <th scope="col" style="width: 50px">TAG</th>
+                                <th scope="col">Tipo </th>
+                                <th scope="col">Situação </th>
+                                <th scope="col">Marca </th>
+                                <th scope="col">Modelo </th>
+                                <th scope="col">Empresa </th>
+                                <th scope="col">Colaborador </th>
+                                <th scope="col" style="width: 70px">Status</th>
+                                <th scope="col" style="width: 50px">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for equipamentosInativo in equipamentosInativos %}
+                                <tr>
+                                    <th scope="row">{{equipamentosInativo.tag_patrimonio}}</th>
+                                    <th scope="row">{{equipamentosInativo.tipo_equipamento}}</th>
+                                    <th scope="row">{{equipamentosInativo.get_situacao_display}}</th>
+                                    <th scope="row">{{equipamentosInativo.marca}}</th>
+                                    <th scope="row">{{equipamentosInativo.modelo}}</th>
+                                    <th scope="row">{{equipamentosInativo.empresa}}</th>
+                                    <th scope="row">{{equipamentosInativo.colaborador}}</th>
+                                    <td>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDisabled" disabled="">
+                                            <label class="form-check-label" for="flexSwitchCheckDisabled"></label>
+                                        </div>
+                                    </td>
+                                    <td style="center">
+                                        <a href="#">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+              </div><!-- End Default Tabs -->
+
+            </div>
+
+            
+            <br>
+            <hr>
+            <a href="{% url 'cadastrar_equipamento' %}">
+                <button class="btn btn-primary">Cadastrar</button>
+            </a>
+            <br>
+        </div>
+    </div>
+{% endblock content %}
+
+
+{% block javascript %}
+    <script>
+    $(document).ready(function () {
+        $(".dataTable").DataTable({
+        language: {
+            url: "//cdn.datatables.net/plug-ins/1.12.1/i18n/pt-BR.json",
+        },
+        });
+    });
+    </script>
+
+{% endblock javascript %}

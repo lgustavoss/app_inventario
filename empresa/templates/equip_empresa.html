@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+
+{% block title%}
+Detalhes Empresa
+{% endblock title %}
+
+{% block breadcrumb %}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html"><i class="bi bi-house-door"></i></a></li>
+    <li class="breadcrumb-item active">Empresa</li>
+    <li class="breadcrumb-item active">Detalhes</li>
+</o>
+{% endblock breadcrumb %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-4">
+                <br>
+                <div class="box-body box-profile">
+                        <h3 class="profile-username text-center">{{empresa.nome}}</h3>
+                        <p class="text-muted text-center">{{empresa.cnpj}}</p>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>TAG: </th>
+                            <th>Tipo: </th>
+                            <th>Situação: </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for equipamento in equipamentos %}
+                        <tr>
+                            <td><a href="#">{{equipamento.tag_patrimonio}}</a></td>
+                            <td>{{equipamento.tipo_equipamento}}</td>
+                            <td>{{equipamento.get_situacao_display}}<td>
+                            <td>
+                                {% if equipamento.status == True %}
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckCheckedDisabled" checked="" disabled="">
+                                            <label class="form-check-label" for="flexSwitchCheckCheckedDisabled"><b></b></label>
+                                        </div>
+                                    {% elif equipamento.status == False %}
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDisabled" disabled="">
+                                            <label class="form-check-label" for="flexSwitchCheckDisabled"></label>
+                                        </div>
+                                    {% endif %}
+                            <td>
+                        <tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                    <a href="{% url 'cadastrar_equipamento' %}" class="btn btn-primary btn-block">
+                        Cadastrar Equipamento</a>
+            </div>
+            <div class="col-lg-8">
+                <br>
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <i class="ri-book-mark-fill"></i><li class="active">Histórico</li>
+                    </ul>
+                    <div class="active tab-pane" id="timeline">
+                        </li>
+                            {% for equipamento in equipamentos %}
+                            <div class="timeline-item">
+                                <br>
+                                <span class="time"> <i class="ri-calendar-event-line"></i>
+                                    {{equipamento.data}}
+                                </span>
+                                <p class="timeline-header">
+                                    Foi cadastrado um(a) {{equipamento.tipo_equipamento}}, {{equipamento.get_situacao_display}} e de tag {{equipamento.tag_patrimonio}}
+                                </p>
+                                <hr>
+                            </div>
+                            {% endfor %}
+                        </li>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}

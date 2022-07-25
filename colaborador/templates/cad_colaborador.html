@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load meus_filtros %}
+{% block title%} Cadastro de Colaborador {% endblock title%}
+
+{% block breadcrumb %}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html"><i class="bi bi-house-door"></i></a></li>
+    <li class="breadcrumb-item active">Colaborador</li>
+    <li class="breadcrumb-item active">Cadastrar</li>
+</ol
+{% endblock breadcrumb %}
+
+
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="POST">
+                {% csrf_token %}
+                <br>
+                <div class="form-group">
+                    <label>Nome: </label>
+                    {{form_colaborador.nome.errors}}
+                    {{form_colaborador.nome|addclass:'form-control'}}
+                </div>
+                <br>
+                <div class="form-group">
+                    <label>CPF: </label>
+                    {{form_colaborador.cpf.errors}}
+                    {{form_colaborador.cpf|addclass:'form-control'}}
+                </div>
+                <br>
+                <div class="form-check form-switch" onclick="alterar()">
+                    {{form_colaborador.status|addclass:'form-check-input'}}
+                    <label id="ativoInativo">Ativo</label>
+                </div>
+                <br>
+                <hr>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="ri-save-2-fill"></i>
+                        <span>Salvar</span>
+                    </button>
+                    <a class="btn btn-secondary" href="{% url 'listar_colaboradores' %}">
+                        <i class="bi bi-box-arrow-right"></i>
+                        <span>Voltar</span>
+                    </a>
+                </div>
+                
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block javascript %}
+    <script>
+        $("#id_cpf").mask("000.000.000-00");
+
+        const button = document.querySelector("#id_status");
+
+        //Mudando nome para Ativo/Inativo conforme a checkbox
+        button.addEventListener("click", function() {
+            let elemento = document.querySelector('#ativoInativo');
+            if (elemento.innerText === 'Ativo') {
+                elemento.innerText = 'Inativo';
+            } else {
+                elemento.innerText = 'Ativo';
+            }
+        })
+    </script>
+
+{% endblock javascript %}

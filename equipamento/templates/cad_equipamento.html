@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+{% load meus_filtros %}
+{% block title%} Cadastro de Equipamentos {% endblock title%}
+
+{% block breadcrumb %}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html"><i class="bi bi-house-door"></i></a></li>
+    <li class="breadcrumb-item active">Equipamentos</li>
+    <li class="breadcrumb-item active">Cadastrar</li>
+</ol
+{% endblock breadcrumb %}
+
+
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="POST">
+                {% csrf_token %}
+                <br>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                                <label>Tag Patrimonio: </label>
+                                {{form_equipamento.tag_patrimonio.errors}}
+                                {{form_equipamento.tag_patrimonio|addclass:'form-control'}}
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                                <label>Tipo Equipamento: </label>
+                                {{form_equipamento.tipo_equipamento.errors}}
+                                {{form_equipamento.tipo_equipamento|addclass:'form-control'}}
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                                <label>Situação: </label>
+                                {{form_equipamento.situacao.errors}}
+                                {{form_equipamento.situacao|addclass:'form-control'}}
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                                <label>Pedido / NFE: </label>
+                                {{form_equipamento.pedido.errors}}
+                                {{form_equipamento.pedido|addclass:'form-control'}}
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                                <label>Data da Compra: </label>
+                                {{form_equipamento.data.errors}}
+                                {{form_equipamento.data|addclass:'form-control'}}
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                                <label>Empresa: </label>
+                                {{form_equipamento.empresa.errors}}
+                                {{form_equipamento.empresa|addclass:'form-control'}}
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Colaborador: </label>
+                            {{form_equipamento.colaborador.errors}}
+                            {{form_equipamento.colaborador|addclass:'form-control'}}
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                                <label>Marca: </label>
+                                {{form_equipamento.marca.errors}}
+                                {{form_equipamento.marca|addclass:'form-control'}}
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                                <label>Modelo: </label>
+                                {{form_equipamento.modelo.errors}}
+                                {{form_equipamento.modelo|addclass:'form-control'}}
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                                <label>Especificações: </label>
+                                {{form_equipamento.especificacoes.errors}}
+                                {{form_equipamento.especificacoes|addclass:'form-control'}}
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                                <label>Acesso Remoto: </label>
+                                {{form_equipamento.acesso_remoto.errors}}
+                                {{form_equipamento.acesso_remoto|addclass:'form-control'}}
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                                <label>ID Acesso: </label>
+                                {{form_equipamento.acesso_id.errors}}
+                                {{form_equipamento.acesso_id|addclass:'form-control'}}
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                                <label>Senha Acesso: </label>
+                                {{form_equipamento.acesso_senha.errors}}
+                                {{form_equipamento.acesso_senha|addclass:'form-control'}}
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                                <label>Observações: </label>
+                                {{form_equipamento.observacao.errors}}
+                                {{form_equipamento.observacao|addclass:'form-control'}}
+                        </div>
+                    </div>
+                </div>
+                <br>
+                    <div class="form-check form-switch" onclick="alterar()">
+                        {{form_equipamento.status|addclass:'form-check-input'}}
+                        <label id="ativoInativo">Ativo</label>
+                    </div>
+                <br>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="ri-save-2-fill"></i>
+                        <span>Salvar</span>
+                    </button>
+                    <a class="btn btn-secondary" href="{% url 'listar_equipamentos' %}">
+                        <i class="bi bi-box-arrow-right"></i>
+                        <span>Voltar</span>
+                    </a>
+                </div>              
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block javascript %}
+    <script>
+        //Mudando nome para Ativo/Inativo conforme a checkbox
+        const button = document.querySelector("#id_status");
+
+        button.addEventListener("click", function() {
+            let elemento = document.querySelector('#ativoInativo');
+            if (elemento.innerText === 'Ativo') {
+                elemento.innerText = 'Inativo';
+            } else {
+                elemento.innerText = 'Ativo';
+            }
+        })
+    </script>
+
+{% endblock javascript %}

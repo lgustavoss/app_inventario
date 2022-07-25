@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="container">
+  <br />
+  <div class="row">
+    <div class="col-md">
+      <span style="font-weight: bold">Dashboard</span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <br />
+      <h5 style="text-align: center">Equipamentos</h5>
+      <canvas id="total_equipamentos"></canvas>
+    </div>
+    <div class="col-md-4">
+      <br />
+      <h5 style="text-align: center">Empresas</h5>
+      <canvas id="total_empresas"></canvas>
+    </div>
+    <div class="col-md-4">
+      <br />
+      <h5 style="text-align: center">Colaboradores</h5>
+      <canvas id="total_colaboradores"></canvas>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12" style="height=5px">
+      <br />
+      <h5 style="text-align: center">Equipamentos por Empresa</h5>
+      <canvas id="equip_empresa"></canvas>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <br />
+      <canvas id="equip_tipo"></canvas>
+    </div>
+  </div>
+</div>
+
+{% endblock content %} {% block javascript %}
+<script>
+  // Renderizando graficos na tela
+  window.onload = function (event) {
+    renderiza_total_equipamentos('{% url "retorna_total_equipamentos" %}');
+    renderiza_total_empresas('{% url "retorna_total_empresas" %}');
+    renderiza_total_colaboradores('{% url "retorna_total_colaboradores" %}');
+    renderiza_equipamento_empresa('{% url "retorna_equipamento_empresa" %}');
+    renderiza_equipamento_tipo('{% url "retorna_equipamento_tipo" %}');
+  };
+
+</script>
+
+{% endblock javascript %}

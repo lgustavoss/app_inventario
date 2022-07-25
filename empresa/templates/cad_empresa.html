@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load meus_filtros %}
+{% block title%} Cadastro de Empresa {% endblock title%}
+
+{% block breadcrumb %}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html"><i class="bi bi-house-door"></i></a></li>
+    <li class="breadcrumb-item active">Empresa</li>
+    <li class="breadcrumb-item active">Cadastrar</li>
+</ol
+{% endblock breadcrumb %}
+
+
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="POST">
+                {% csrf_token %}
+                <br>
+                <div class="form-group">
+                    <label>Nome: </label>
+                    {{form_empresa.nome.errors}}
+                    {{form_empresa.nome|addclass:'form-control'}}
+                </div>
+                <br>
+                <div class="form-group">
+                    <label>CNPJ: </label>
+                    {{form_empresa.cnpj.errors}}
+                    {{form_empresa.cnpj|addclass:'form-control'}}
+                </div>
+                <br>
+                <div class="form-check form-switch" onclick="alterar()">
+                    {{form_empresa.status|addclass:'form-check-input'}}
+                    <label id="ativoInativo">Ativo</label>
+                </div>
+                <br>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="ri-save-2-fill"></i>
+                        <span>Salvar</span>
+                    </button>
+                    <a class="btn btn-secondary" href="{% url 'listar_empresas' %}">
+                        <i class="bi bi-box-arrow-right"></i>
+                        <span>Voltar</span>
+                    </a>
+                </div>
+                
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block javascript %}
+    <script>
+        //Aplicando mascara de CNPJ
+        $("#id_cnpj").mask("00.000.000/0000-00");
+
+
+        //Mudando nome para Ativo/Inativo conforme a checkbox
+        const button = document.querySelector("#id_status");
+
+        button.addEventListener("click", function() {
+            let elemento = document.querySelector('#ativoInativo');
+            if (elemento.innerText === 'Ativo') {
+                elemento.innerText = 'Inativo';
+            } else {
+                elemento.innerText = 'Ativo';
+            }
+        })
+    </script>
+
+{% endblock javascript %}

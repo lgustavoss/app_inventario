@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load meus_filtros %}
+{% block title%} Cadastro dos Tipos de Equipamentos {% endblock title%}
+
+{% block breadcrumb %}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html"><i class="bi bi-house-door"></i></a></li>
+    <li class="breadcrumb-item active">Tipos de Equipamentos</li>
+    <li class="breadcrumb-item active">Cadastrar</li>
+</ol
+{% endblock breadcrumb %}
+
+
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="POST">
+                {% csrf_token %}
+                <br>
+                <div class="form-group">
+                        <label>Tipo: </label>
+                        {{form_tipoEquipamento.tipo.errors}}
+                        {{form_tipoEquipamento.tipo|addclass:'form-control'}}
+                        <br>
+                        <div class="form-check form-switch" onclick="alterar()">
+                            {{form_tipoEquipamento.status|addclass:'form-check-input'}}
+                            <label id="ativoInativo">Ativo</label>
+                        </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="ri-save-2-fill"></i>
+                        <span>Salvar</span>
+                    </button>
+                    <a class="btn btn-secondary" href="{% url 'listar_tipos_equipamentos' %}">
+                        <i class="bi bi-box-arrow-right"></i>
+                        <span>Voltar</span>
+                    </a>
+                </div>              
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block javascript %}
+    <script>
+        //Mudando nome para Ativo/Inativo conforme a checkbox
+        const button = document.querySelector("#id_status");
+
+        button.addEventListener("click", function() {
+            let elemento = document.querySelector('#ativoInativo');
+            if (elemento.innerText === 'Ativo') {
+                elemento.innerText = 'Inativo';
+            } else {
+                elemento.innerText = 'Ativo';
+            }
+        })
+    </script>
+
+{% endblock javascript %}
