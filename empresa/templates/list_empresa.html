@@ -40,7 +40,9 @@ Listagem de Empresas
                                 <th scope="col" style="width: 450px">Nome</th>
                                 <th scope="col" style="width: 250px">CNPJ</th>
                                 <th scope="col" style="width: 50px">Status</th>
+                                {% if request.user.tipo != 1 %}
                                 <th scope="col" style="width: 50px">Ações</th>
+                                {% endif %}
                             </tr>
                         </thead>
                         <tbody>
@@ -61,11 +63,13 @@ Listagem de Empresas
                                         </div>
                                     {% endif %}
                                 </td>
+                                {% if request.user.tipo != 1 %}
                                 <td style="center">
                                     <a href="{% url 'editar_empresa' empresa.id %}">
                                         <i class="bi bi-pencil-square"></i>
                                     </a>
                                 </td>
+                                {% endif %}
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -79,7 +83,9 @@ Listagem de Empresas
                                 <th scope="col" style="width: 450px">Nome</th>
                                 <th scope="col" style="width: 250px">CNPJ</th>
                                 <th scope="col" style="width: 50px">Status</th>
+                                {% if request.user.tipo != 1 %}
                                 <th scope="col" style="width: 50px">Ações</th>
+                                {% endif %}
                             </tr>
                         </thead>
                         <tbody>
@@ -94,11 +100,13 @@ Listagem de Empresas
                                             <label class="form-check-label" for="flexSwitchCheckCheckedDisabled"><b></b></label>
                                         </div>
                                         </td>
+                                        {% if request.user.tipo != 1 %}
                                         <td style="center">
                                             <a href="{% url 'editar_empresa' empresa.id %}">
                                                 <i class="bi bi-pencil-square"></i>
                                             </a>
                                         </td>
+                                        {% endif %}
                                     </tr>
                                 {% endif %}
                             {% endfor %}
@@ -113,7 +121,9 @@ Listagem de Empresas
                                 <th scope="col" style="width: 450px">Nome</th>
                                 <th scope="col" style="width: 250px">CNPJ</th>
                                 <th scope="col" style="width: 50px">Status</th>
+                                {% if request.user.tipo != 1 %}
                                 <th scope="col" style="width: 50px">Ações</th>
+                                {% endif %}
                             </tr>
                         </thead>
                         <tbody>
@@ -128,11 +138,13 @@ Listagem de Empresas
                                                 <label class="form-check-label" for="flexSwitchCheckDisabled"></label>
                                             </div>
                                         </td>
+                                        {% if request.user.tipo != 1 %}
                                         <td style="center">
                                             <a href="{% url 'editar_empresa' empresa.id %}">
                                                 <i class="bi bi-pencil-square"></i>
                                             </a>
                                         </td>
+                                        {% endif %}
                                     </tr>
                                 {% endif %}
                             {% endfor %}
@@ -143,9 +155,11 @@ Listagem de Empresas
             </div>
             <br>
             <hr>
+            {% if request.user.tipo != 1 %}
             <a href="{% url 'cadastrar_empresa' %}">
                 <button class="btn btn-primary">Cadastrar</button>
             </a>
+            {% endif %}
             <br>
         </div>
     </div>

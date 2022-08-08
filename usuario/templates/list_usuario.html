@@ -2,13 +2,13 @@
 
 
 {% block title%}
-Listagem de Colaboradores
+Listagem de Empresas
 {% endblock title %}
 
 {% block breadcrumb %}
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="index.html"><i class="bi bi-house-door"></i></a></li>
-    <li class="breadcrumb-item active">Colaboradores</li>
+    <li class="breadcrumb-item active">Empresa</li>
     <li class="breadcrumb-item active">Listar</li>
 </o>
 {% endblock breadcrumb %}
@@ -38,38 +38,34 @@ Listagem de Colaboradores
                         <thead>
                             <tr>
                                 <th scope="col" style="width: 450px">Nome</th>
-                                <th scope="col" style="width: 250px">CPF</th>
+                                <th scope="col" style="width: 250px">CNPJ</th>
                                 <th scope="col" style="width: 50px">Status</th>
-                                {% if request.user.tipo != 1 %}
                                 <th scope="col" style="width: 50px">Ações</th>
-                                {% endif %}
                             </tr>
                         </thead>
                         <tbody>
-                            {% for colaborador in colaboradores %}
+                            {% for empresa in empresas %}
                             <tr>
-                                <th scope="row">{{colaborador.nome}}</th>
-                                <th scope="row">{{colaborador.cpf}}</th>
+                                <th scope="row"><a href="{% url 'listar_empresa_id' empresa.id %}">{{empresa.nome}}</a></th>
+                                <th scope="row">{{empresa.cnpj}}</th>
                                 <td>
-                                    {% if colaborador.status == True %}
+                                    {% if empresa.status == True %}
                                         <div class="form-check form-switch">
                                             <input class="form-check-input" type="checkbox" id="flexSwitchCheckCheckedDisabled" checked="" disabled="">
                                             <label class="form-check-label" for="flexSwitchCheckCheckedDisabled"><b></b></label>
                                         </div>
-                                    {% elif colaborador.status == False %}
+                                    {% elif empresa.status == False %}
                                         <div class="form-check form-switch">
                                             <input class="form-check-input" type="checkbox" id="flexSwitchCheckDisabled" disabled="">
                                             <label class="form-check-label" for="flexSwitchCheckDisabled"></label>
                                         </div>
                                     {% endif %}
                                 </td>
-                                {% if request.user.tipo != 1 %}
                                 <td style="center">
-                                    <a href="{% url 'editar_colaborador' colaborador.id %}">
+                                    <a href="{% url 'editar_empresa' empresa.id %}">
                                         <i class="bi bi-pencil-square"></i>
                                     </a>
                                 </td>
-                                {% endif %}
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -81,32 +77,28 @@ Listagem de Colaboradores
                         <thead>
                             <tr>
                                 <th scope="col" style="width: 450px">Nome</th>
-                                <th scope="col" style="width: 250px">CPF</th>
+                                <th scope="col" style="width: 250px">CNPJ</th>
                                 <th scope="col" style="width: 50px">Status</th>
-                                {% if request.user.tipo != 1 %}
                                 <th scope="col" style="width: 50px">Ações</th>
-                                {% endif %}
                             </tr>
                         </thead>
                         <tbody>
-                            {% for colaborador in colaboradores %}
-                                {% if colaborador.status == True %}
+                            {% for empresa in empresas %}
+                                {% if empresa.status == True %}
                                     <tr>
-                                        <th scope="row">{{colaborador.nome}}</th>
-                                        <th scope="row">{{colaborador.cpf}}</th>
+                                        <th scope="row">{{empresa.nome}}</th>
+                                        <th scope="row">{{empresa.cnpj}}</th>
                                         <td>
                                             <div class="form-check form-switch">
                                             <input class="form-check-input" type="checkbox" id="flexSwitchCheckCheckedDisabled" checked="" disabled="">
                                             <label class="form-check-label" for="flexSwitchCheckCheckedDisabled"><b></b></label>
                                         </div>
                                         </td>
-                                        {% if request.user.tipo != 1 %}
                                         <td style="center">
-                                            <a href="{% url 'editar_colaborador' colaborador.id %}">
+                                            <a href="{% url 'editar_empresa' empresa.id %}">
                                                 <i class="bi bi-pencil-square"></i>
                                             </a>
                                         </td>
-                                        {% endif %}
                                     </tr>
                                 {% endif %}
                             {% endfor %}
@@ -119,32 +111,28 @@ Listagem de Colaboradores
                         <thead>
                             <tr>
                                 <th scope="col" style="width: 450px">Nome</th>
-                                <th scope="col" style="width: 250px">CPF</th>
+                                <th scope="col" style="width: 250px">CNPJ</th>
                                 <th scope="col" style="width: 50px">Status</th>
-                                {% if request.user.tipo != 1 %}
-                                    <th scope="col" style="width: 50px">Ações</th>
-                                {% endif %}
+                                <th scope="col" style="width: 50px">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for colaborador in colaboradores %}
-                                {% if colaborador.status == False %}
+                            {% for empresa in empresas %}
+                                {% if empresa.status == False %}
                                     <tr>
-                                        <th scope="row">{{colaborador.nome}}</th>
-                                        <th scope="row">{{colaborador.cpf}}</th>
+                                        <th scope="row">{{empresa.nome}}</th>
+                                        <th scope="row">{{empresa.cnpj}}</th>
                                         <td>
                                             <div class="form-check form-switch">
                                                 <input class="form-check-input" type="checkbox" id="flexSwitchCheckDisabled" disabled="">
                                                 <label class="form-check-label" for="flexSwitchCheckDisabled"></label>
                                             </div>
                                         </td>
-                                        {% if request.user.tipo != 1 %}
                                         <td style="center">
-                                            <a href="{% url 'editar_colaborador' colaborador.id %}">
+                                            <a href="{% url 'editar_empresa' empresa.id %}">
                                                 <i class="bi bi-pencil-square"></i>
                                             </a>
                                         </td>
-                                        {% endif %}
                                     </tr>
                                 {% endif %}
                             {% endfor %}
@@ -155,11 +143,9 @@ Listagem de Colaboradores
             </div>
             <br>
             <hr>
-            {% if request.user.tipo != 1 %}
-            <a href="{% url 'cadastrar_colaborador' %}">
+            <a href="{% url 'cadastrar_empresa' %}">
                 <button class="btn btn-primary">Cadastrar</button>
             </a>
-            {% endif %}
             <br>
         </div>
     </div>

@@ -39,7 +39,9 @@ Tipos de Equipamentos
                             <tr>
                                 <th scope="col" style="width: 450px">Tipo</th>
                                 <th scope="col" style="width: 50px">Status</th>
+                                {% if request.user.tipo != 1 %}
                                 <th scope="col" style="width: 50px">Ações</th>
+                                {% endif %}
                             </tr>
                         </thead>
                         <tbody>
@@ -59,11 +61,13 @@ Tipos de Equipamentos
                                         </div>
                                     {% endif %}
                                 </td>
+                                {% if request.user.tipo != 1 %}
                                 <td style="center">
                                     <a href="{% url 'editar_tipo_equipamento' tipoEquipamento.id %}">
                                         <i class="bi bi-pencil-square"></i>
                                     </a>
                                 </td>
+                                {% endif %}
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -76,7 +80,9 @@ Tipos de Equipamentos
                             <tr>
                                 <th scope="col" style="width: 450px">Tipo</th>
                                 <th scope="col" style="width: 50px">Status</th>
+                                {% if request.user.tipo != 1 %}
                                 <th scope="col" style="width: 50px">Ações</th>
+                                {% endif %}
                             </tr>
                         </thead>
                         <tbody>
@@ -89,11 +95,13 @@ Tipos de Equipamentos
                                         <label class="form-check-label" for="flexSwitchCheckCheckedDisabled"><b></b></label>
                                     </div>
                                     </td>
+                                    {% if request.user.tipo != 1 %}
                                     <td style="center">
                                         <a href="{% url 'editar_tipo_equipamento' tipoEquipamentosAtivo.id %}">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
                                     </td>
+                                    {% endif %}
                                 </tr>
                             {% endfor %}
                         </tbody>
@@ -106,7 +114,9 @@ Tipos de Equipamentos
                             <tr>
                                 <th scope="col" style="width: 450px">Tipo</th>
                                 <th scope="col" style="width: 50px">Status</th>
+                                {% if request.user.tipo != 1 %}
                                 <th scope="col" style="width: 50px">Ações</th>
+                                {% endif %}
                             </tr>
                         </thead>
                         <tbody>
@@ -119,11 +129,13 @@ Tipos de Equipamentos
                                                 <label class="form-check-label" for="flexSwitchCheckDisabled"></label>
                                             </div>
                                         </td>
+                                        {% if request.user.tipo != 1 %}
                                         <td style="center">
                                             <a href="{% url 'editar_tipo_equipamento' tipoEquipamentosInativo.id %}">
                                                 <i class="bi bi-pencil-square"></i>
                                             </a>
                                         </td>
+                                        {% endif %}
                                     </tr>
                             {% endfor %}
                         </tbody>
@@ -136,10 +148,12 @@ Tipos de Equipamentos
             
             <br>
             <hr>
+            {% if request.user.tipo != 1 %}
             <a href="{% url 'cadastrar_tipo_equipamento' %}">
                 <button class="btn btn-primary">Cadastrar</button>
             </a>
             <br>
+            {% endif %}
         </div>
     </div>
 

@@ -26,6 +26,11 @@
         {{form_usuario.email|addclass:'form-control'}}
     </div>
     <div class="form-group">
+        {{form_usuario.tipo.errors}}
+        <label>Nivel de Acesso:</label>
+        {{form_usuario.tipo|addclass:'form-control'}}
+    </div>
+    <div class="form-group">
         {{form_usuario.password1.errors}}
         <label>Senha:</label>
         {{form_usuario.password1|addclass:'form-control'}}
