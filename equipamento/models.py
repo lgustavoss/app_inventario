@@ -1,5 +1,4 @@
 from django.db import models
-from audit_log.models.managers import AuditLog
 
 from empresa.models import Empresa
 from colaborador.models import Colaborador
@@ -44,7 +43,6 @@ class Equipamento(models.Model):
     observacao = models.TextField(
         null=False, blank=True)
     status = models.BooleanField(default=True)
-    audit_log = AuditLog()
 
     def __str__(self):
         return self.tag_patrimonio

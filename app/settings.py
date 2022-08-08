@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'tipo_equipamento',
     'equipamento',
     'dashboard',
+    'usuario',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +56,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'audit_log.middleware.UserLoggingMiddleware',
 ]
 
 ROOT_URLCONF = 'app.urls'
@@ -119,6 +119,10 @@ TIME_ZONE = 'America/Sao_Paulo'
 USE_I18N = True
 
 USE_TZ = True
+
+AUTH_USER_MODEL = 'usuario.Usuario'
+
+LOGIN_URL = 'login'
 
 
 # Static files (CSS, JavaScript, Images)
