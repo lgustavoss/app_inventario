@@ -1,5 +1,4 @@
 from http.client import HTTPResponse
-import imp
 from itertools import count
 from django.shortcuts import render
 from equipamento.models import Equipamento

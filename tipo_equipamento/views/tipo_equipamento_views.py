@@ -20,20 +20,19 @@ def listar_tipoEquipamentos(request):
 # Cadastro de Tipos de Equipamentos
 
 def cadastrar_tipoEquipamentos(request):
-    if request.user.is_authenticated and request.user.tipo != 1:
-        if request.method == "POST":
-            form_tipoEquipamento = TipoEquipamentoForm(request.POST or None)
-            if form_tipoEquipamento.is_valid():
-                tipo = form_tipoEquipamento.cleaned_data["tipo"]
-                status = form_tipoEquipamento.cleaned_data["status"]
-                tipoEquipamento_novo = tipo_equipamento.TipoEquipamento(
-                    tipo=tipo, status=status)
-                tipo_equipamento_service.cadastrar_tipoEquipamento(
-                    tipoEquipamento_novo)
-                return redirect('listar_tipos_equipamentos')
-        else:
-            form_tipoEquipamento = TipoEquipamentoForm()
-        return render(request, 'cad_tipo.html', {'form_tipoEquipamento': form_tipoEquipamento})
+    if request.method == "POST":
+        form_tipoEquipamento = TipoEquipamentoForm(request.POST or None)
+        if form_tipoEquipamento.is_valid():
+            tipo = form_tipoEquipamento.cleaned_data["tipo"]
+            status = form_tipoEquipamento.cleaned_data["status"]
+            tipoEquipamento_novo = tipo_equipamento.TipoEquipamento(
+                tipo=tipo, status=status)
+            tipo_equipamento_service.cadastrar_tipoEquipamento(
+                tipoEquipamento_novo)
+            return redirect('listar_tipos_equipamentos')
+    else:
+        form_tipoEquipamento = TipoEquipamentoForm()
+    return render(request, 'cad_tipo.html', {'form_tipoEquipamento': form_tipoEquipamento})
 
 
 # Editando os tipos de Equipamentos
