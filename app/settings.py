@@ -120,9 +120,9 @@ USE_I18N = True
 
 USE_TZ = True
 
-AUTH_USER_MODEL = 'usuario.Usuario'
+#AUTH_USER_MODEL = 'usuario.Usuario'
 
-LOGIN_URL = 'login'
+#LOGIN_URL = 'login'
 
 
 # Static files (CSS, JavaScript, Images)

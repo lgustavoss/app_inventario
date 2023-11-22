@@ -12,21 +12,18 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def cadastrar_usuario(request):
-    if request.user.is_authenticated and request.user.tipo == 3:
-        if request.method == "POST":
-            form_usuario = UsuarioForm(data=request.POST)
-            if form_usuario.is_valid():
-                nome = form_usuario.cleaned_data["nome"]
-                email = form_usuario.cleaned_data["email"]
-                tipo = form_usuario.cleaned_data["tipo"]
-                password1 = form_usuario.cleaned_data["password1"]
-                usuario_novo = Usuario(nome=nome, email=email, tipo=tipo, password=password1)
-                usuario_service.cadastrar_usuario(usuario_novo)
-                return redirect('home')
-        else:
-            form_usuario = UsuarioForm()
+    if request.method == "POST":
+        form_usuario = UsuarioForm(data=request.POST)
+        if form_usuario.is_valid():
+            nome = form_usuario.cleaned_data["nome"]
+            email = form_usuario.cleaned_data["email"]
+            tipo = form_usuario.cleaned_data["tipo"]
+            password1 = form_usuario.cleaned_data["password1"]
+            usuario_novo = Usuario(nome=nome, email=email, tipo=tipo, password=password1)
+            usuario_service.cadastrar_usuario(usuario_novo)
+            return redirect('home')
     else:
-        return redirect('login')
+            form_usuario = UsuarioForm()
     return render(request, 'cad_usuario.html', {'form_usuario': form_usuario})
 
 
